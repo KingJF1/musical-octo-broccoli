@@ -1,0 +1,5 @@
+package com.zhiyou.jdbc.test;
+
+public class ResultSetTest {
+
+}

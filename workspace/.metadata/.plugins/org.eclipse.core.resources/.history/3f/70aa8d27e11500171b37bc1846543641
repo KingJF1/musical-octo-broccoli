@@ -1,0 +1,26 @@
+package com.zhiyou.jdbc.test;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class JDBCDdl {
+	public final static String URL = "jdbc:oracle:thin:@192.168.21.218:1521:orcl";
+	public final static String DRIVER_CLASS = "oracle.jdbc.driver.OracleDriver";
+	public final static String USERNAME = "JJF";
+	public final static String PASSWORD = "jIN13462967465";
+	static {
+		try {
+			Class.forName(DRIVER_CLASS);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public static Connection getConnection() throws SQLException{
+		return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+	}
+
+}

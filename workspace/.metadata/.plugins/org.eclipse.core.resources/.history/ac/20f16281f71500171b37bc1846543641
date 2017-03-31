@@ -1,0 +1,32 @@
+package com.zhiyou.jdbc.test;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class PreparedStatementClass {
+	public PreparedStatementClass(String name,long sal) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		String sql = "select * from employees where emp_name=? and salary>?";
+		try {
+			connection = JDBCDdl.getConnection();
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, name);
+			statement.setLong(2, sal);
+			result = statement.executeQuery();
+			while (result.next()) {
+				System.out.println(result.getString(1));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	
+	
+	}
+}

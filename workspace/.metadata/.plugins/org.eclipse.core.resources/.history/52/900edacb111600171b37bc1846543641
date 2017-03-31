@@ -1,0 +1,36 @@
+package com.zhiyou.p1.ws.d4.chatroom;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.Socket;
+import java.util.Timer;
+
+import javax.swing.JTextArea;
+
+public class BtnClient implements ActionListener{
+	private JTextArea msgSend;
+	private Socket socket;
+	
+	public BtnClient(JTextArea msgSend2, Socket socket2) {
+		this.msgSend = msgSend2;
+		this.socket = socket2;
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		long time = System.currentTimeMillis();
+		String msg = socket.getLocalAddress()+""
+				+ "------"++":\n"+msgSend.getText() + "\n";
+		try {
+			socket.getOutputStream().write(msg.getBytes());
+			socket.getOutputStream().flush();
+			//清空发送的输入框
+			msgSend.setText("");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+	}
+
+}

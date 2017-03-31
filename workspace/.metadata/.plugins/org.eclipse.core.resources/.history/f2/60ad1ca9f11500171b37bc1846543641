@@ -1,0 +1,32 @@
+package com.zhiyou.jdbc.test;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class ResultSetTest {
+	public static void main(String[] args) {
+		try {
+			Connection con = JDBCDdl.getConnection();
+			String sql = "select * from employees while belong_dep_code=?;";
+			PreparedStatement stat =  con.prepareStatement(sql);
+			stat.setLong(1, 1001);
+			ResultSet res = stat.executeQuery();
+			while (res.next()) {
+				String EMP_CODE = res.getString(1)+"   ";
+				String EMP_NAME = res.getString(2)+"   ";
+				String STATUS = res.getString(3)+"   ";
+				String SALARY = res.getString(4)+"   ";
+				String STATUS_SALARY = res.getString(5)+"   ";
+				String WORK_BEGIN_DATE = res.getString(6)+"   ";
+				String PARENT_CODE = res.getString(7)+"   ";
+				String BELONG_DEP_CODE = res.getString(8);
+				System.out.println(EMP_CODE+EMP_NAME+STATUS+SALARY+STATUS_SALARY+WORK_BEGIN_DATE+PARENT_CODE+BELONG_DEP_CODE);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+}
