@@ -1,0 +1,92 @@
+package com.zhiyou.p1.ws.d4.chatroom;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+public class LoginMain {
+	private JTextField IDText;   //学号文本框
+	private JPasswordField passwdText;  //密码文本框
+	private JButton signin;   //身份下拉列表
+	private JLabel loginlab;   //登录状态标签
+	private JFrame jframe;    //窗体
+	public LoginMain(){
+		JLabel userlab = new JLabel("学  号:",JLabel.CENTER);   //创建学号标签
+		IDText = new JTextField(25);   //实例学号文本
+		JLabel passwdlab = new JLabel("密  码;",JLabel.CENTER);   //创建密码标签
+		passwdText = new JPasswordField(25);   //实例化密码文本框
+		loginlab = new JLabel("登录状态",JLabel.CENTER);   //实例化登录状态标签
+		signin = new JButton("注册"); 
+		jframe = new JFrame("学生管理系统登录界面");   //实例化一个窗口，并设置标题
+		JPanel userPanel = new JPanel();   //创建userPanel面板
+		JPanel passwdPanel = new JPanel();   //创建passwdPanel面板
+		JPanel buttonPanel = new JPanel();   //创建buttonPanel面板
+		JPanel labelPanel = new JPanel();   //创建labelPanel面板
+		userPanel.add(userlab);   //将userlab添加到userPanel面板
+		userPanel.add(IDText);   //将IDText添加到userPanel面板
+		passwdPanel.add(passwdlab);   //将passwdlab添加到passwdPanel面板
+		passwdPanel.add(passwdText);   //将passwdText添加到passwdPanel面板
+		JButton submit = new JButton("登录");  //创建按钮并设置文本
+		JButton reset = new JButton("重置");  //创建按钮并设置文本
+//		buttonPanel.add(IDlabel);   //将IDlabel添加到buttonPanel面板
+		buttonPanel.add(submit);   //将submit添加到buttonPanel面板
+		buttonPanel.add(signin);   //将box添加到buttonPanel面板
+		buttonPanel.add(reset);   //将reset添加到buttonPanel面板
+		Font font = new Font("楷体",Font.BOLD+Font.PLAIN,35);//创建Font对象
+		loginlab.setFont(font);   //设置loginlab标签文本字体
+		loginlab.setForeground(Color.BLUE);   //设置loginlab标签文本颜色
+		labelPanel.add(loginlab);
+		submit.addActionListener(new ActionListener() {
+			//注册submit按钮事件监听器
+			public void actionPerformed(ActionEvent e) {
+				String user = IDText.getText();  //获取学号
+				String passwd = new String(passwdText.getPassword());//获取密码
+//				String identity = (String) signin.getSelectedItem();
+
+				LoginCheck date = new LoginCheck(user,passwd);  //连接数据库
+				boolean flag = date.prepared();
+				if (flag) {
+					//判断是否合法用户
+					new ChartRoomServer();
+					loginlab.setForeground(Color.GREEN);
+					loginlab.setText("登录成功！！！");
+				} else {
+					loginlab.setForeground(Color.RED);
+					loginlab.setText("登录失败！！！");
+				}
+			}
+		});
+		reset.addActionListener(new ActionListener() {
+			//注册reset按钮事件监听器
+			public void actionPerformed(ActionEvent e) {
+				IDText.setText("");  //重置学号文本框
+				passwdText.setText("");  //重置密码文本框
+				loginlab.setForeground(Color.BLUE);//设置标签文本颜色
+				loginlab.setText("请重新登录！！！");
+			}
+		});
+		jframe.setLayout(new GridLayout(4, 1));
+		//  设置窗体为GridLayout布局管理器
+		jframe.add(userPanel);  //将userPanel面板添加到窗体
+		jframe.add(passwdPanel);  //将passwdPanel面板添加到窗体
+		jframe.add(buttonPanel);  //将buttonPanel面板添加到窗体
+		jframe.add(labelPanel);  //将labelPanel面板添加到窗体
+		jframe.setSize(400, 200);  //设置窗口大小
+		jframe.setLocation(250,350);  //设置窗口初始位置
+		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//设置窗口关闭方式
+		jframe.setVisible(true);
+	}
+	public static void main(String[] args) {
+		new LoginMain();
+	}
+}

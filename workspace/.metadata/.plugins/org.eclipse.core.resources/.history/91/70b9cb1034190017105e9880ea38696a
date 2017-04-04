@@ -1,0 +1,53 @@
+package com.zhiyou.p1.ws.d4.chatroom;
+
+import java.sql.*;
+import javax.swing.*;
+import sqlpackage.DBConnection;
+public class LoginCheck {
+	private String id;  //id属性
+	private String passwd;  //密码属性
+	private String identity;  //身份属性
+	public LoginCheck() {
+		//无参构造方法
+	}
+	public LoginCheck(String id,String passwd) {
+		//有参构造方法
+		this.id = id;
+		this.passwd = passwd;
+		
+	}
+	/* 
+	 *使用PreparedStatement实例执行SQL语句
+	 */
+	public boolean prepared() {
+		Connection conn = null;  //声明Connection对象
+		PreparedStatement perstat = null;   //声明PreparedStatement对象
+		ResultSet rs = null;
+		try {
+			conn = DBConnection.getConnection();
+			String sql = "select id,password from " + this.identity + " where id = ? and password = ?";
+			perstat = conn.prepareStatement(sql);  //执行SQL语句
+			perstat.setString(1, id);    //传入用户名  
+			perstat.setString(2, passwd);    //传入用户密码
+			rs = perstat.executeQuery();   //接收查询结果
+			if (rs.next()) {
+				return true;  //表示查询出来，合法用户
+			}
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "登录查询失败！！！","☆"
+					+ "★提示信息★☆",JOptionPane.INFORMATION_MESSAGE);
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.close();   //关闭数据库连接
+				System.out.println("关闭数据库成功！");
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "关闭数据库失败！！！","☆"
+					+ "★提示信息★☆",JOptionPane.INFORMATION_MESSAGE);
+			//提示关闭数据库失败
+			}
+		}
+		return false;   //表示查询不出来，非法用户
+	}
+}

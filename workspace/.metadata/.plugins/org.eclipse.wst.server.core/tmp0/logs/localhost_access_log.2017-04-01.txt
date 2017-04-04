@@ -1,0 +1,9 @@
+127.0.0.1 - - [01/Apr/2017:12:03:19 +0800] "GET / HTTP/1.1" 404 994
+127.0.0.1 - - [01/Apr/2017:12:03:22 +0800] "GET /OptiontransterselectDemo/index.jsp HTTP/1.1" 200 5190
+127.0.0.1 - - [01/Apr/2017:12:03:22 +0800] "GET /OptiontransterselectDemo/struts/optiontransferselect.js HTTP/1.1" 200 6259
+127.0.0.1 - - [01/Apr/2017:12:05:02 +0800] "POST /OptiontransterselectDemo/user;jsessionid=17F380276F53C53656CE56F95D99D5F5 HTTP/1.1" 200 314
+127.0.0.1 - - [01/Apr/2017:12:05:06 +0800] "POST /OptiontransterselectDemo/user;jsessionid=17F380276F53C53656CE56F95D99D5F5 HTTP/1.1" 200 313
+127.0.0.1 - - [01/Apr/2017:12:05:10 +0800] "POST /OptiontransterselectDemo/user;jsessionid=17F380276F53C53656CE56F95D99D5F5 HTTP/1.1" 200 427
+127.0.0.1 - - [01/Apr/2017:12:05:24 +0800] "POST /OptiontransterselectDemo/user;jsessionid=17F380276F53C53656CE56F95D99D5F5 HTTP/1.1" 200 379
+127.0.0.1 - - [01/Apr/2017:12:05:29 +0800] "POST /OptiontransterselectDemo/user;jsessionid=17F380276F53C53656CE56F95D99D5F5 HTTP/1.1" 200 336
+127.0.0.1 - - [01/Apr/2017:12:05:44 +0800] "POST /OptiontransterselectDemo/user;jsessionid=17F380276F53C53656CE56F95D99D5F5 HTTP/1.1" 200 356

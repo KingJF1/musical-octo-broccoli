@@ -1,0 +1,29 @@
+package com.zhiyou.p1.ws.d4.chatroom;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
+
+public class ChartRoomServer {
+	public static Map<String,Socket> connectedSockets = new HashMap<String,Socket>();
+	
+	
+	public static void main(String[] args) {
+		try {
+			ServerSocket server = new ServerSocket(8888);
+			while (true) {
+				Socket socket = server.accept();
+//				开启新的线程来单独为socket服务
+				connectedSockets.put(socket.getInetAddress().getHostAddress(), socket);
+				
+				ServerMessageRunnable serverMessageRunnable = new ServerMessageRunnable(socket,connectedSockets);
+				new Thread(serverMessageRunnable).start();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

@@ -1,0 +1,5 @@
+package sqlpackage;
+
+public class DBConnection {
+
+}

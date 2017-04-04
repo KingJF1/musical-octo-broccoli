@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Timer;
 
 import javax.swing.JTextArea;
 
@@ -17,7 +20,10 @@ public class BtnClient implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String msg = socket.getLocalAddress()+":\n"+msgSend.getText() + "\n";
+		long time = System.currentTimeMillis();
+		Date date = new Date(time);
+		String msg = socket.getLocalAddress()+""
+				+ "------"+date+":\n"+msgSend.getText() + "\n";
 		try {
 			socket.getOutputStream().write(msg.getBytes());
 			socket.getOutputStream().flush();

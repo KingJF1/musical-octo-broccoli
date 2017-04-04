@@ -1,0 +1,101 @@
+package com.zhiyou.p1.ws.d4.chatroom;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.Scanner;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
+public class ChatRoomFrame extends JFrame implements ActionListener, KeyListener{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JTextArea msgList;
+	private JButton btnSend;
+	private JTextArea msgSend;
+	
+	
+	public JTextArea getMsgList() {
+		return msgList;
+	}
+	public JButton getBtnSend() {
+		return btnSend;
+	}
+	
+	public JTextArea getMsgSend() {
+		return msgSend;
+	}
+	public ChatRoomFrame() {
+		//设置界面的title
+		this.setTitle("智游12聊天室");
+		JPanel jPanel = new JPanel();
+		this.setSize(768, 864);
+		jPanel.setBackground(new Color(222, 222, 222));
+		msgList = new JTextArea(20,20);
+		msgList.setBackground(new Color(0, 222, 222));
+		msgSend = new JTextArea(1, 40);
+		btnSend = new JButton("发送");
+//		btnSend.addActionListener(this);
+//		btnSend.addKeyListener(this);
+		
+		//设置消息显示框的自动换行
+		msgSend.setLineWrap(true);
+		msgSend.setCaretPosition(0);
+		
+		msgList.setFont(new Font("宋体", Font.PLAIN, 20));
+		msgSend.setFont(new Font("宋体", Font.PLAIN, 20));
+		
+		msgList.setText("欢迎进入聊天室，请畅所欲言吧。。。");
+		btnSend.setBackground(new Color(213, 218, 155));
+		this.getContentPane().setLayout(new BorderLayout());
+		this.getContentPane().add(msgList,BorderLayout.CENTER);
+		this.getContentPane().add(msgSend,BorderLayout.SOUTH);
+		this.getContentPane().add(jPanel, BorderLayout.SOUTH);
+		jPanel.add(msgSend);
+		jPanel.add(btnSend);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
+		
+		
+		
+		
+		
+		
+		
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	@Override
+	public void keyTyped(KeyEvent e) {
+		
+		
+	}
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+		
+	}
+	@Override
+	public void keyReleased(KeyEvent e) {
+		
+		
+	}
+}

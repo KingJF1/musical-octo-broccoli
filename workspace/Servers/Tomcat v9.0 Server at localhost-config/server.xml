@@ -149,7 +149,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="UserCBLTagDemo" path="/UserCBLTagDemo" reloadable="true" source="org.eclipse.jst.jee.server:UserCBLTagDemo"/><Context docBase="ComboboxDemo" path="/ComboboxDemo" reloadable="true" source="org.eclipse.jst.jee.server:ComboboxDemo"/><Context docBase="DoubleselectDemo" path="/DoubleselectDemo" reloadable="true" source="org.eclipse.jst.jee.server:DoubleselectDemo"/><Context docBase="InputtransferselectDemo" path="/InputtransferselectDemo" reloadable="true" source="org.eclipse.jst.jee.server:InputtransferselectDemo"/></Host>
+      <Context docBase="UserCBLTagDemo" path="/UserCBLTagDemo" reloadable="true" source="org.eclipse.jst.jee.server:UserCBLTagDemo"/><Context docBase="ComboboxDemo" path="/ComboboxDemo" reloadable="true" source="org.eclipse.jst.jee.server:ComboboxDemo"/><Context docBase="DoubleselectDemo" path="/DoubleselectDemo" reloadable="true" source="org.eclipse.jst.jee.server:DoubleselectDemo"/><Context docBase="InputtransferselectDemo" path="/InputtransferselectDemo" reloadable="true" source="org.eclipse.jst.jee.server:InputtransferselectDemo"/><Context docBase="OptiontransterselectDemo" path="/OptiontransterselectDemo" reloadable="true" source="org.eclipse.jst.jee.server:OptiontransterselectDemo"/></Host>
     </Engine>
   </Service>
 </Server>

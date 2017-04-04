@@ -1,0 +1,61 @@
+package sqlpackage;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class DBConnection {
+	@SuppressWarnings("finally")
+	public static Connection getConnection() {
+		Connection conn = null;  //声明Connection对象
+		//Statement stat = null;   //声明Statement对象
+		try {
+			Class.forName("com.mysql.jdbc.Driver");//加载JDBC
+			System.out.println("JDBC加载成功！！！");
+		} catch (Exception e) {
+			System.out.println("MySQL数据库的JDBC加载失败！！！！");
+			e.printStackTrace();
+		}
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/"
+					+ "manager","root","");  //实例化Connection对象
+			System.out.println("MYSQL数据库连接成功！！！");
+			//stat = conn.createStatement();
+		} catch (SQLException e1) {
+			System.out.println("MySQL数据库连接失败！！！");
+			e1.printStackTrace();
+		}finally {
+			
+		return conn;
+		}
+}
+	public static void close(Connection conn) {
+		try {
+			conn.close();   //关闭数据库，释放资源
+			System.out.println("MySQL数据库关闭成功！！！");
+		} catch (SQLException e) {
+			System.out.println("MySQL数据库关闭失败！！！");
+			e.printStackTrace();
+		}
+		
+	}
+	public static void main(String[] args) {
+		Connection conn = null;
+		conn = DBConnection.getConnection();
+		DBConnection.close(conn);
+	}
+	public static void close(PreparedStatement pstmt) {
+		// TODO Auto-generated method stub
+		try {
+			pstmt.close();
+			System.out.println("成功");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("失败");
+			e.printStackTrace();
+		}
+	}
+}
+
