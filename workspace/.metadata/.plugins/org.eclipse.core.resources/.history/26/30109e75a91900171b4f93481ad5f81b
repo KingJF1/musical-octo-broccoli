@@ -1,0 +1,76 @@
+package com.zhiyou.jdbc.test;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class PreparedStatementClass {
+	public PreparedStatementClass(String name,long sal) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		String sql = "select * from employees where emp_name=? and salary>?";
+		try {
+			connection = JDBCDdl.getConnection();
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, name);
+			statement.setLong(2, sal);
+			result = statement.executeQuery();
+			while (result.next()) {
+				System.out.println(result.getString(1));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public PreparedStatementClass() {
+		// TODO Auto-generated constructor stub
+	}
+	public void insertEmployeesByBat() {
+		try {
+			Connection connection = JDBCDdl.getConnection();
+			String sql = "insert into employees(emp_code,emp_name,salary) "
+					+ "values(seq_employees.nextval,?,?)";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			for (int i = 0; i < 5; i++) {
+				preparedStatement.setString(1, "批量插入"+i);
+				preparedStatement.setDouble(2, 8000);
+				preparedStatement.addBatch();
+			}
+			preparedStatement.executeBatch();
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void executeByTransaction() {
+		try {
+			Connection connection = JDBCDdl.getConnection();
+			String sql = "update employees set salary=salary+1000 where salary=5000";
+			String sql1 = "update employees set salary=3000 where salary is null";
+			Statement statement = connection.createStatement();
+			connection.setAutoCommit(false);
+			try {
+				int r1 = statement.executeUpdate(sql);
+				System.out.println("第一条更新影响了" + r1 + "行");
+				int r2 = statement.executeUpdate(sql1);
+				System.out.println("第二条更新影响了" + r2 + "行");
+				connection.commit();
+			} catch (Exception e) {
+				connection.rollback();
+				System.out.println("有SQL语句执行失败，事务回滚");
+			}
+			connection.close();
+		} catch (SQLException e) {
+			
+		}
+	}
+	public static void main(String[] args) {
+		PreparedStatementClass preparedStatement = new PreparedStatementClass();
+		preparedStatement.executeByTransaction();
+	}
+}
